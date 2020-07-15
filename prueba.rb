@@ -12,9 +12,6 @@ def request(url_requested)
 end
 
 def build_web_page(data)
-    
-    #new_hash={}
-    i=0
     html=""
     new_hash={}
     new_hash=data["photos"]
@@ -27,7 +24,26 @@ def build_web_page(data)
 end    
 
 def photos_count(data)
-    
+#Crear un método photos_count que reciba el hash de respuesta y devuelva
+#un nuevo hash con el nombre de la camara y la cantidad de fotos.
+    new_hash={}
+    nh2={}
+    ctd=0
+    new_hash=data["photos"]
+    new_hash.each do |k,v| 
+        nh2[ctd] = k["camera"]["full_name"]
+        ctd=ctd+1
+    end
+    #puts nh2[0]
+    nh3={}
+    nh4={}
+    nh3= nh2.keys.group_by { |k| nh2[k] }
+    #puts nh3
+    ctd=0
+    nh3.each do |k,v|
+        puts k + " " + nh3[k].count.to_s 
+    end
+
 end
 
 web="https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=10&api_key="
